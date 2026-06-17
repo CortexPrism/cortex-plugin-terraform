@@ -20,25 +20,30 @@ cortex chat --plugin cortex-plugin-terraform
 ## Tools
 
 ### iac_generate — Generate IaC from description
+
 - `description` (string, required)
 - `tool` (enum: terraform/pulumi, terraform)
 - `provider` (string, aws)
 - `output_file` (string, required)
 
 ### iac_validate — Validate IaC
+
 - `path` (string, required)
 - `tool` (string)
 
 ### iac_plan — Run plan/preview
+
 - `path` (string, required)
 - `tool` (string)
 
 ### iac_apply — Apply changes
+
 - `path` (string, required)
 - `tool` (string)
 - `auto_approve` (boolean)
 
 ### iac_destroy — Destroy infrastructure
+
 - `path` (string, required)
 - `tool` (string)
 - `force` (boolean)

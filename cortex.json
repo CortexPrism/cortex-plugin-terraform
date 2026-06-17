@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-terraform",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generate IaC from natural language, validate, plan, apply",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -18,10 +18,30 @@
       "name": "iac_generate",
       "description": "Generate IaC from description",
       "params": [
-        { "name": "description", "type": "string", "description": "Natural language description of infrastructure", "required": true },
-        { "name": "tool", "type": "string", "description": "IaC tool: terraform or pulumi", "required": false },
-        { "name": "provider", "type": "string", "description": "Cloud provider", "required": false },
-        { "name": "output_file", "type": "string", "description": "Output file path", "required": true }
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Natural language description of infrastructure",
+          "required": true
+        },
+        {
+          "name": "tool",
+          "type": "string",
+          "description": "IaC tool: terraform or pulumi",
+          "required": false
+        },
+        {
+          "name": "provider",
+          "type": "string",
+          "description": "Cloud provider",
+          "required": false
+        },
+        {
+          "name": "output_file",
+          "type": "string",
+          "description": "Output file path",
+          "required": true
+        }
       ]
     },
     {
@@ -29,7 +49,12 @@
       "description": "Validate IaC configuration",
       "params": [
         { "name": "path", "type": "string", "description": "Path to IaC files", "required": true },
-        { "name": "tool", "type": "string", "description": "IaC tool: terraform or pulumi", "required": false }
+        {
+          "name": "tool",
+          "type": "string",
+          "description": "IaC tool: terraform or pulumi",
+          "required": false
+        }
       ]
     },
     {
@@ -37,7 +62,12 @@
       "description": "Run plan/preview",
       "params": [
         { "name": "path", "type": "string", "description": "Path to IaC files", "required": true },
-        { "name": "tool", "type": "string", "description": "IaC tool: terraform or pulumi", "required": false }
+        {
+          "name": "tool",
+          "type": "string",
+          "description": "IaC tool: terraform or pulumi",
+          "required": false
+        }
       ]
     },
     {
@@ -45,8 +75,18 @@
       "description": "Apply changes (requires approval)",
       "params": [
         { "name": "path", "type": "string", "description": "Path to IaC files", "required": true },
-        { "name": "tool", "type": "string", "description": "IaC tool: terraform or pulumi", "required": false },
-        { "name": "auto_approve", "type": "boolean", "description": "Skip approval prompt", "required": false }
+        {
+          "name": "tool",
+          "type": "string",
+          "description": "IaC tool: terraform or pulumi",
+          "required": false
+        },
+        {
+          "name": "auto_approve",
+          "type": "boolean",
+          "description": "Skip approval prompt",
+          "required": false
+        }
       ]
     },
     {
@@ -54,17 +94,55 @@
       "description": "Destroy infrastructure",
       "params": [
         { "name": "path", "type": "string", "description": "Path to IaC files", "required": true },
-        { "name": "tool", "type": "string", "description": "IaC tool: terraform or pulumi", "required": false },
-        { "name": "force", "type": "boolean", "description": "Force destroy without confirmation", "required": false }
+        {
+          "name": "tool",
+          "type": "string",
+          "description": "IaC tool: terraform or pulumi",
+          "required": false
+        },
+        {
+          "name": "force",
+          "type": "boolean",
+          "description": "Force destroy without confirmation",
+          "required": false
+        }
       ]
     }
   ],
   "ui": {
     "section": "General",
     "fields": [
-      { "key": "defaultTool", "label": "Default Tool", "type": "select", "description": "Default IaC tool", "defaultValue": "terraform", "options": [{ "label": "Terraform", "value": "terraform" }, { "label": "Pulumi", "value": "pulumi" }] },
-      { "key": "defaultProvider", "label": "Default Provider", "type": "select", "description": "Default cloud provider", "defaultValue": "aws", "options": [{ "label": "AWS", "value": "aws" }, { "label": "GCP", "value": "gcp" }, { "label": "Azure", "value": "azurerm" }, { "label": "Cloudflare", "value": "cloudflare" }] },
-      { "key": "requireApproval", "label": "Require Approval", "type": "boolean", "description": "Require confirmation before apply", "defaultValue": true }
+      {
+        "key": "defaultTool",
+        "label": "Default Tool",
+        "type": "select",
+        "description": "Default IaC tool",
+        "defaultValue": "terraform",
+        "options": [
+          { "label": "Terraform", "value": "terraform" },
+          { "label": "Pulumi", "value": "pulumi" }
+        ]
+      },
+      {
+        "key": "defaultProvider",
+        "label": "Default Provider",
+        "type": "select",
+        "description": "Default cloud provider",
+        "defaultValue": "aws",
+        "options": [
+          { "label": "AWS", "value": "aws" },
+          { "label": "GCP", "value": "gcp" },
+          { "label": "Azure", "value": "azurerm" },
+          { "label": "Cloudflare", "value": "cloudflare" }
+        ]
+      },
+      {
+        "key": "requireApproval",
+        "label": "Require Approval",
+        "type": "boolean",
+        "description": "Require confirmation before apply",
+        "defaultValue": true
+      }
     ]
   },
   "dependencies": {},
