@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-terraform",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate IaC from natural language, validate, plan, apply",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -48,7 +48,12 @@
       "name": "iac_validate",
       "description": "Validate IaC configuration",
       "params": [
-        { "name": "path", "type": "string", "description": "Path to IaC files", "required": true },
+        {
+          "name": "path",
+          "type": "string",
+          "description": "Path to IaC files",
+          "required": true
+        },
         {
           "name": "tool",
           "type": "string",
@@ -61,7 +66,12 @@
       "name": "iac_plan",
       "description": "Run plan/preview",
       "params": [
-        { "name": "path", "type": "string", "description": "Path to IaC files", "required": true },
+        {
+          "name": "path",
+          "type": "string",
+          "description": "Path to IaC files",
+          "required": true
+        },
         {
           "name": "tool",
           "type": "string",
@@ -74,7 +84,12 @@
       "name": "iac_apply",
       "description": "Apply changes (requires approval)",
       "params": [
-        { "name": "path", "type": "string", "description": "Path to IaC files", "required": true },
+        {
+          "name": "path",
+          "type": "string",
+          "description": "Path to IaC files",
+          "required": true
+        },
         {
           "name": "tool",
           "type": "string",
@@ -93,7 +108,12 @@
       "name": "iac_destroy",
       "description": "Destroy infrastructure",
       "params": [
-        { "name": "path", "type": "string", "description": "Path to IaC files", "required": true },
+        {
+          "name": "path",
+          "type": "string",
+          "description": "Path to IaC files",
+          "required": true
+        },
         {
           "name": "tool",
           "type": "string",
@@ -110,38 +130,60 @@
     }
   ],
   "ui": {
-    "section": "General",
-    "fields": [
+    "settings": [
       {
-        "key": "defaultTool",
-        "label": "Default Tool",
-        "type": "select",
-        "description": "Default IaC tool",
-        "defaultValue": "terraform",
-        "options": [
-          { "label": "Terraform", "value": "terraform" },
-          { "label": "Pulumi", "value": "pulumi" }
+        "section": "General",
+        "fields": [
+          {
+            "key": "defaultTool",
+            "label": "Default Tool",
+            "type": "select",
+            "description": "Default IaC tool",
+            "default": "terraform",
+            "enum": [
+              {
+                "label": "Terraform",
+                "value": "terraform"
+              },
+              {
+                "label": "Pulumi",
+                "value": "pulumi"
+              }
+            ]
+          },
+          {
+            "key": "defaultProvider",
+            "label": "Default Provider",
+            "type": "select",
+            "description": "Default cloud provider",
+            "default": "aws",
+            "enum": [
+              {
+                "label": "AWS",
+                "value": "aws"
+              },
+              {
+                "label": "GCP",
+                "value": "gcp"
+              },
+              {
+                "label": "Azure",
+                "value": "azurerm"
+              },
+              {
+                "label": "Cloudflare",
+                "value": "cloudflare"
+              }
+            ]
+          },
+          {
+            "key": "requireApproval",
+            "label": "Require Approval",
+            "type": "boolean",
+            "description": "Require confirmation before apply",
+            "default": true
+          }
         ]
-      },
-      {
-        "key": "defaultProvider",
-        "label": "Default Provider",
-        "type": "select",
-        "description": "Default cloud provider",
-        "defaultValue": "aws",
-        "options": [
-          { "label": "AWS", "value": "aws" },
-          { "label": "GCP", "value": "gcp" },
-          { "label": "Azure", "value": "azurerm" },
-          { "label": "Cloudflare", "value": "cloudflare" }
-        ]
-      },
-      {
-        "key": "requireApproval",
-        "label": "Require Approval",
-        "type": "boolean",
-        "description": "Require confirmation before apply",
-        "defaultValue": true
       }
     ]
   },
@@ -150,7 +192,10 @@
     "cortex": ">=1.0.0"
   },
   "aiDisclosure": {
-    "tools": ["Claude Code (Anthropic)"],
+    "tools": [
+      "Claude Code (Anthropic)"
+    ],
     "humanReview": true
-  }
+  },
+  "homepage": "https://github.com/CortexPrism/cortex-plugin-terraform"
 }

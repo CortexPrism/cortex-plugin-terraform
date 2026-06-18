@@ -3,6 +3,7 @@ import type { PluginContext, Tool, ToolCallResult, ToolContext } from './types.t
 let config: Record<string, string | boolean> = {};
 
 export async function onLoad(ctx: PluginContext): Promise<void> {
+  ctx.logger.info(`[cortex-plugin-terraform] Loaded`);
   config = {
     defaultTool: (await ctx.config.get('defaultTool')) ?? 'terraform',
     defaultProvider: (await ctx.config.get('defaultProvider')) ?? 'aws',
@@ -17,13 +18,26 @@ async function runShell(
   args: string[],
   cwd?: string,
 ): Promise<{ success: boolean; stdout: string; stderr: string }> {
-  const p = new Deno.Command(cmd, { args, cwd: cwd || undefined });
-  const { stdout, stderr } = await p.output();
-  return {
-    success: p.spawn().status !== null,
-    stdout: new TextDecoder().decode(stdout),
-    stderr: new TextDecoder().decode(stderr),
-  };
+  try {
+    const p = new Deno.Command(cmd, {
+      args,
+      cwd: cwd || undefined,
+      stdout: 'piped',
+      stderr: 'piped',
+    });
+    const { code, stdout, stderr } = await p.output();
+    return {
+      success: code === 0,
+      stdout: new TextDecoder().decode(stdout),
+      stderr: new TextDecoder().decode(stderr),
+    };
+  } catch (error) {
+    return {
+      success: false,
+      stdout: '',
+      stderr: error instanceof Error ? error.message : String(error),
+    };
+  }
 }
 
 function resolveTool(tool: string): { cmd: string; ext: string } {
