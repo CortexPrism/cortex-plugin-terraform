@@ -1,5 +1,5 @@
 // deno-lint-ignore-file
-import type { PluginContext, Tool, ToolCallResult, ToolContext } from './types.ts';
+import type { PluginContext, Tool, ToolCallResult } from 'cortex/plugins';
 
 let config: Record<string, string | boolean> = {};
 
@@ -68,7 +68,7 @@ const iac_generate: Tool = {
     ],
     capabilities: ['fs:write', 'shell:run'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const description = args.description as string;
@@ -125,7 +125,7 @@ const iac_validate: Tool = {
     ],
     capabilities: ['shell:run'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const path = args.path as string;
@@ -187,7 +187,7 @@ const iac_plan: Tool = {
     ],
     capabilities: ['shell:run'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const path = args.path as string;
@@ -246,7 +246,7 @@ const iac_apply: Tool = {
     ],
     capabilities: ['shell:run'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const path = args.path as string;
@@ -316,7 +316,7 @@ const iac_destroy: Tool = {
     ],
     capabilities: ['shell:run'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const path = args.path as string;

@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-terraform",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate IaC from natural language, validate, plan, apply",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -139,8 +139,8 @@
             "label": "Default Tool",
             "type": "select",
             "description": "Default IaC tool",
-            "default": "terraform",
-            "enum": [
+            "defaultValue": "terraform",
+            "options": [
               {
                 "label": "Terraform",
                 "value": "terraform"
@@ -156,8 +156,8 @@
             "label": "Default Provider",
             "type": "select",
             "description": "Default cloud provider",
-            "default": "aws",
-            "enum": [
+            "defaultValue": "aws",
+            "options": [
               {
                 "label": "AWS",
                 "value": "aws"
@@ -181,7 +181,7 @@
             "label": "Require Approval",
             "type": "boolean",
             "description": "Require confirmation before apply",
-            "default": true
+            "defaultValue": true
           }
         ]
       }
@@ -189,7 +189,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "cortex": ">=1.0.0"
+    "cortex": ">=0.51.0"
   },
   "aiDisclosure": {
     "tools": [
